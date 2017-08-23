@@ -1,6 +1,6 @@
 # DMODE V1.0.0
 
-DMODE stands for Django's Structure With Mongodb On Node Platform. DMODE basically is MVT(Model View Template) programming structure for node, that provides Modularity, structuring and easy implementation of things like Socket, routing etc. One can make a entire project using plain javascript.
+DMODE stands for Django's Structure With Mongodb On Node Platform. DMODE basically is MVT(Model View Template) programming structure for node, that provides Modularity, structuring and easy implementation of things like Socket, routing etc. One can make an entire project using plain javascript.
 
 ### Prerequisites
 
@@ -144,6 +144,13 @@ importSocket('<appname>') // imports socket of <appname>
 
 ```
 
+2. importModel
+
+```
+importModel('<appname>') // imports model of <appname>
+
+```
+
 ### Reponse : 
 1. HttpResponse(response, jsonData)
 
@@ -187,6 +194,7 @@ var userScema = {
 var User = db.models('user', userSchema); //db.models('tablename', schema);
 
 exports.User = User;
+_________________________________________________________________________________
 
 <appname>/views.js
 
