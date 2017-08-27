@@ -30,6 +30,10 @@ then
 elif [ ${COMMAND[0]} == "migratefonts" ];
 then
 	node /usr/local/bin/dmode.js migratefonts
+# version
+elif [ ${COMMAND[0]} == "-v" ];
+then
+	echo "v1.0.0"
 else
 	node /usr/local/bin/dmode.js error
 fi

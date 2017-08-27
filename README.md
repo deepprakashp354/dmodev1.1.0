@@ -23,7 +23,7 @@ $ ./get-dmode.sh intall
 Step 3 Installation done, run following to verify
 
 ```
-$ dmode
+$ dmode -v
 
 ```
 
@@ -61,9 +61,9 @@ $ dmode createapp <appname>
 
 ```
 
-Step 7 Open 'views.js' from <appname> folder, you'll find a index function that has been provided for first time user.
+Step 7 Open 'views.js' from '<appname>' folder, you'll find a index function that has been provided for first time user.
 
-Step 8 Open 'url.js' from <appname> folder, uncomment the url.
+Step 8 Open 'url.js' from '<appname>' folder, uncomment the url.
 
 ```
 var views = require('./views.js');
@@ -101,7 +101,7 @@ exports.INSTALLED_APPS=[
 
 ```
 
-Step 10 Import your app to 'urls.js' inside <projectname> folder.
+Step 10 Import your app to 'urls.js' inside '<projectname>' folder.
 
 ```
 var appname = imports('<appname>');
@@ -180,7 +180,7 @@ index.html
 ```
 <appname>/models.js
 
-var db = imoports('db');
+var db = imports('db');
 
 var userScema = {
  	username:{ type: String, required: true, unique: true },
