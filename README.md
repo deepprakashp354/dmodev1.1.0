@@ -162,7 +162,7 @@ HttpResponse(response, {test : "Hello DMODE!"}) // returns response of apis in j
 2. render(response, string)
 
 ```
-render(render, "Hello DMODE!"); // returns response of apis as string
+render(response, "Hello DMODE!"); // returns response of apis as string
 
 ```
 3. renderToResponse(response, path, data)
