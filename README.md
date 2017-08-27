@@ -113,7 +113,7 @@ Step 11 Map your api to a url.
 ```
 exports.api = function(router){
 	method.page(router, '/', '/index.html')
-	method.get(router, '/index', appname.index)
+	method.get(router, '/index', appname.urls.index)
 }
 
 ```
@@ -134,20 +134,20 @@ Step 12 Open [http://localhost:8080/index](http://localhost:8080/index), you'll 
 ```
 imports('db'); // imports takes dmode apis
 imports('fs'); // node modules
-imports('<appname>'); // <appnames>.url
+imports('<appname>'); // <appname>.urls.apiname or <appname>.socket.socketevent or <appname>.models.modelname
 
 ```
 2. importSocket
 
 ```
-importSocket('<appname>') // imports socket of <appname>
+importSocket('<appname>') // imports socket of <appname> explicitly
 
 ```
 
 2. importModel
 
 ```
-importModel('<appname>') // imports model of <appname>
+importModel('<appname>') // imports model of <appname> explicitly
 
 ```
 
@@ -198,9 +198,9 @@ ________________________________________________________________________________
 
 <appname>/views.js
 
-var models = importModel('<appname>');
+var appname = imports('<appname>'); // you can also use importModel()
 
-models.User.find(data).then(function(resp){
+appname.models.User.find(data).then(function(resp){
 	
 	// console.log(resp);
 
@@ -234,12 +234,12 @@ ________________________________________________________________________________
 
 <projectname>/urls.js
 
-var appSocket = importSocket('<appname>');
+var appname = imports('<appname>'); // you can also use importSocket()
 
 // connect your socket events
 exports.sockets = function(){
 	return {
-		test : appSocket.testSocket,
+		test : appname.socket.testSocket,
 	}
 }
 __________________________________________________________________________________
