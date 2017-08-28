@@ -91,7 +91,7 @@ exports.db = {
 
 // fonts
 exports.fonts = [
-	'RobotoCondensedBold.ttf',
+	'Roboto-Regular.ttf',
 ]
 
 exports.INSTALLED_APPS=[
@@ -269,7 +269,7 @@ Secure.encode("somedata/password");
 ```
 // fonts
 exports.fonts = [
-	'RobotoCondensedBold.ttf',
+	'Roboto-Regular.ttf',
 ]
 
 ```
@@ -287,7 +287,11 @@ $ dmode migratefonts
 
 method.page(router, '/route', '/index.html');
 
-method.get(router, '/route', '/getrequestapi);
+method.get(router, '/route', app.urls.getrequestapi);
 
-method.post(router, '/route', '/postrequest')
+method.post(router, '/route', app.urls.postrequestapi);
+
+method.put(router, '/route/:data', app.urls.putrequestapi);
+
+method.delete(router, '/route', app.urls.deleterequesteapi);
 ```
