@@ -294,8 +294,8 @@ method.post(router, '/route', app.urls.postrequestapi);
 method.put(router, '/route/:data', app.urls.putrequestapi);
 
 method.delete(router, '/route', app.urls.deleterequesteapi);
-```
 
+```
 ### Templates
 
 1. Plain Html Template
