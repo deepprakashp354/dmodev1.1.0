@@ -144,7 +144,7 @@ importSocket('<appname>') // imports socket of <appname> explicitly
 
 ```
 
-3. importModel
+2. importModel
 
 ```
 importModel('<appname>') // imports model of <appname> explicitly
@@ -294,8 +294,8 @@ method.post(router, '/route', app.urls.postrequestapi);
 method.put(router, '/route/:data', app.urls.putrequestapi);
 
 method.delete(router, '/route', app.urls.deleterequesteapi);
-
 ```
+
 ### Templates
 
 1. Plain Html Template
@@ -318,3 +318,61 @@ $ dmode startproject react-template
 $ dmode startproject react-redux-template
 
 ```
+
+### User Management
+
+1. Importing Auth
+
+```
+var auth = imports('./../libs/prebuild/user.js');
+
+```
+
+2. Auth.login()
+
+```
+var authUser = auth.login(username,password).then(function(result){
+	
+}).catch(function(err){
+	
+});
+
+```
+
+3. Auth.register()
+
+```
+var params = {
+	fullname : "admin",
+	email : "xyz@email.com",
+	password : "asdfghjkl",
+	phone : "9087654321"	
+}
+
+var reg = auth.register(params).then(function(result){
+	
+}).catch(function(err){
+	
+});
+
+```
+
+4. Auth.logout()
+
+```
+var logout = auth.logout(request).then(function(result){
+	
+}).catch(function(err){
+	
+});
+
+```
+
+5. Get logged in user
+
+```
+var user = request.user;
+
+```
+
+
