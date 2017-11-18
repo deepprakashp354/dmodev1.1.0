@@ -368,7 +368,7 @@ var logout = auth.logout(request).then(function(result){
 
 ```
 
-5. Exclude api token authrization
+5. Exclude api token authorization
 
 ```
 settings.js
