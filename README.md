@@ -368,7 +368,19 @@ var logout = auth.logout(request).then(function(result){
 
 ```
 
-5. Get logged in user
+5. Exclude api token authrization
+
+```
+settings.js
+
+exports.EXCLUDE_AUTH = [
+	'/user/login/',
+	'/user/register/',
+]
+
+``` 
+
+6. Get logged in user
 
 ```
 var user = request.user;
