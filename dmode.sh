@@ -51,7 +51,7 @@ then
 # version
 elif [[ ${COMMAND[0]} == "-v" ]];
 then
-	echo "v1.0.0"
+	echo "v1.1.0"
 else
 	node /usr/local/bin/dmode.js error
 fi
