@@ -510,7 +510,7 @@ Form.get(request).then(function(body){
 	
 })
 
-3.  Form.upload()
+3. Form.upload()
 
 Form.get(request).then(function(body){
 	// upload form data	
@@ -534,7 +534,6 @@ Form.get(request).then(function(body){
 var auth = imports('AuthUser');
 
 ```
-
 2. auth.login()
 
 ```
@@ -545,7 +544,6 @@ var authUser = auth.login(username,password).then(function(result){
 });
 
 ```
-
 3. auth.register()
 
 ```
@@ -563,7 +561,6 @@ var reg = auth.register(params).then(function(result){
 });
 
 ```
-
 4. auth.logout()
 
 ```
@@ -574,7 +571,6 @@ var logout = auth.logout(request).then(function(result){
 });
 
 ```
-
 6. Get logged in user
 
 ```
@@ -659,6 +655,3 @@ var users = auth.loggedInUsers(user_id).then(function(result){
 Note : user_id can be a string or array of string user_ids
 
 ```
-
-
-
