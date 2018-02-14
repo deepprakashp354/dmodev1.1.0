@@ -10,25 +10,48 @@ Node
 
 ### Installing
 
-Step 1 Download get-dmode.sh [click here...](http://www.officeshop.co.in/dmode/)
-
-Step 2 Open terminal in get-dmode.sh directory and run the following commands :
+1. Linux
 
 ```
-1. Linux
+Step 1 Download get-dmode.sh [click here...](https://s3.us-east-2.amazonaws.com/dmodev2.0.1/linux/get-dmode.sh)
+
+Step 2 Open terminal in get-dmode.sh directory and run the following commands :
 
 $ chmod u+x get-dmode.sh
 $ ./get-dmode.sh intall
 
+```
 
 2. Windows
 
-* Extract dmode-setup.zip
-* double-click on setup.bat
+```
+Step 1 Download get-dmode.sh [click here...](https://s3.us-east-2.amazonaws.com/dmodev2.0.1/windows/dmode-win-v2.0.1.zip)
+
+Step 2 Extract dmode-win-v2.0.1.zip
+
+Step 3 Move inside the extracted folder
+
+Step 4 double-click on setup.bat
 
 ```
 
-Step 3 Installation done, run following to verify
+3. Mac
+
+```
+Step 1 Download get-dmode.sh [click here...](https://s3.us-east-2.amazonaws.com/dmodev2.0.1/mac/dmode-mac-v2.0.1.zip)
+
+Step 2 Extract dmode-mac-v2.0.1.zip
+
+Step 3 Open terminal inside the extracted folder
+
+Step 4 Run the following commands
+
+$ chmod u+x setup.sh
+$ ./setup.sh install
+
+```
+
+Final Step : Installation done, run following command to verify
 
 ```
 $ dmode -v
