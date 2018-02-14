@@ -15,8 +15,16 @@ Step 1 Download get-dmode.sh [click here...](http://www.officeshop.co.in/dmode/)
 Step 2 Open terminal in get-dmode.sh directory and run the following commands :
 
 ```
+1. Linux
+
 $ chmod u+x get-dmode.sh
 $ ./get-dmode.sh intall
+
+
+2. Windows
+
+* Extract dmode-setup.zip
+* double-click on setup.bat
 
 ```
 
@@ -126,14 +134,15 @@ Step 12 Open [http://localhost:8080/index](http://localhost:8080/index), you'll 
 ```
 
 
-### More fetures :-
+### More features :-
 
 ### Imports :
 1. imports
 
 ```
-imports('db'); // imports takes dmode apis
+imports('db'); // imports takes dmode libs
 imports('fs'); // node modules
+imports('./../<appname>/models.js') // Any relative urls
 imports('<appname>'); // <appname>.urls.apiname or <appname>.socket.socketevent or <appname>.models.modelname
 
 ```
@@ -151,7 +160,7 @@ importModel('<appname>') // imports model of <appname> explicitly
 
 ```
 
-### Reponse : 
+### Response : 
 1. HttpResponse(response, jsonData)
 
 ```
@@ -175,7 +184,7 @@ index.html
 <h2>{{message}}</h2>
 
 ```
-### DB : for reference [Mongoose Documentation](http://mongoosejs.com/docs/api.html)
+### DB : Mongoose
 
 ```
 <appname>/models.js
@@ -209,6 +218,77 @@ appname.models.User.find(data).then(function(resp){
 	// console.log(error);
 
 }
+
+Note : For reference [Mongoose Documentation](http://mongoosejs.com/docs/api.html)
+
+```
+### Live DB :-
+
+```
+<appname>/models.js
+
+var db = imports('db');
+var self = imports('test');
+
+var TestSchema = {
+	name : {
+		type : String,
+		trim : true,
+		required : true 
+	},
+	live : true, // live model
+	callback : self.socket.getNewTest, // callback to get new row added to table
+	interval : 4000 // interval of checking the table for new data
+}
+
+var Test = db.models('Test', TestSchema);
+
+exports.Test = Test;
+
+_________________________________________________________________________________
+
+<appname>/socket.js
+
+exports.getNewTest = function(transporter, data){
+	// transporter.emit("event", {data : "some data"}, users)
+	// users => array(optional) of user_id
+	
+	transporter.emit("test", {name : "Deep Prakash"})
+}
+
+
+```
+
+### Push Notification Service
+
+```
+// import notification module
+
+var notification = require('./../libs/services/notification/notification');
+
+// notification payload
+
+var data = {
+	title : "Notification Title",
+	message : "Notification Message",
+	tapAction : "com.officeshop.dmode_receiver.MainActivity",
+	actions : [{
+		name : "OPEN",
+		intent : "com.officeshop.dmode_receiver.MainActivity"
+	}]
+}
+
+// Pusing notification to devices
+
+notification.push(data, user); // user => array(optional)
+
+Exposed Global variables
+
+1. NOTIFICATION_SOCKET_IO // global socket param
+
+2. NOTIFICATION_SOCKET_USERS; // socket => user mapping
+
+3. NOTIFICATION_CONNECTED_USERS; // socket_id => socket mapping
 
 ```
 
@@ -250,7 +330,100 @@ socket.on('target', function(data){
 	alert(data);
 })
 
+
+Exposed Global Variables
+
+1. SOCKET_IO // global socket param
+
+2. SOCKET_USERS // socket => user mapping
+
+3. global.CONNECTED_USERS // socket_id => socket mapping
+
 ``` 
+
+### CORS : 
+
+```
+settings.js
+
+// CORS Middleware
+exports.ALLOW_CORS = true;
+
+// CROSS ORIGIN
+exports.ALLOW_ORIGIN = [
+	"*",
+	"your origins",
+	.
+	.
+	.
+]
+
+// ALLOW HEADERS
+exports.ALLOW_HEADERS = [
+	"Origin",
+	"X-Requested-With",
+	"Content-Type",
+	"Accept",
+	"Authorization"
+]
+
+// ALLOW OPTIONS
+exports.ALLOW_OPTIONS = [
+	"GET",
+	"POST",
+	"OPTIONS",
+	"PUT",
+	"PATCH",
+	"DELETE"
+]
+
+```
+
+### Auth Middleware
+
+```
+settings.js
+
+1. fill the array with the api names, that you don't want to be authenticated.
+
+// EXCLUDE_AUTH
+exports.EXCLUDE_AUTH=[
+	'/user/login/',
+	'/user/register/',
+	.
+	.
+	.
+]
+
+```
+
+### Permissions
+
+```
+You can validate the permissions or you can get the current user permission.
+
+1. import Permissions Module
+
+var Permissions = imports('Permissions');
+
+2. validate
+
+Permissions.validate(request, "PERMISSION_NAME_YOU_ADDED"); // returns boolean
+
+3. get
+
+Permissions.get(access_token).then(function(result){
+	// result = {
+	//		group : "SUPER_ADMIN",
+	//		permissions : [
+	//			"SU_PERMISSIONS"
+	//		]
+	//  }
+}).catch(function(err){
+	
+})
+
+```
 
 ### Secure : 
 
@@ -295,3 +468,197 @@ method.put(router, '/route/:data', app.urls.putrequestapi);
 
 method.delete(router, '/route', app.urls.deleterequesteapi);
 ```
+
+### Templates
+
+1. Plain Html Template
+
+```
+$ dmode startproject
+
+```
+
+2. React Template
+
+```
+$ dmode startproject react-template
+
+```
+
+3. React-Redux Template
+
+```
+$ dmode startproject react-redux-template
+
+```
+
+### Form
+
+```
+1. Import form
+
+var Form = imports('Form');
+
+2. Form.get()
+
+Form.get(request).then(function(body){
+	// body = {
+	//	 files : {},
+	//	 fields : {}
+	// }
+}).catch(function(err){
+	
+})
+
+3.  Form.upload()
+
+Form.get(request).then(function(body){
+	// upload form data	
+	Form.upload(body.files, '/path/to/upload').then(function(result){
+
+	}).catch(function(err){
+
+	})
+
+}).catch(function(err){
+	
+})
+
+```
+
+### User Management
+
+1. Importing AuthUser
+
+```
+var auth = imports('AuthUser');
+
+```
+
+2. auth.login()
+
+```
+var authUser = auth.login(username,password).then(function(result){
+	
+}).catch(function(err){
+	
+});
+
+```
+
+3. auth.register()
+
+```
+var params = {
+	fullname : "admin",
+	email : "xyz@email.com",
+	password : "asdfghjkl",
+	phone : "9087654321"	
+}
+
+var reg = auth.register(params).then(function(result){
+	
+}).catch(function(err){
+	
+});
+
+```
+
+4. auth.logout()
+
+```
+var logout = auth.logout(request).then(function(result){
+	
+}).catch(function(err){
+	
+});
+
+```
+
+6. Get logged in user
+
+```
+var user = request.user;
+
+```
+
+7. auth.getUsers()
+
+```
+var users = auth.getUsers({_id : "some_id", ...}).then(function(result){
+	// result is the user data returned
+}).catch(function(err){
+	
+})
+
+```
+
+8. auth.addPermission()
+
+```
+var p = auth.addPermission("PERMISSION_TO_BE_ADDED").then(function(result){
+	
+}).catch(function(err){
+	
+})
+
+```
+
+9. auth.viewPermission()
+
+``` 
+var p = auth.viewPermission(id).then(function(result){
+	
+}).catch(function(err){
+	
+})
+
+Note : id parameter is optional. you can pass nothing to get all the permissions
+
+```
+
+10. auth.addUserGroup()
+
+```
+var data = {
+	name : value,	// user group name
+	permissions : perm 	// array of permission ids
+}
+
+var ug = auth.addUserGroup(data).then(function(result){
+
+}).catch(function(err){
+	
+})
+
+```
+
+11. auth.viewUserGroup()
+
+```
+var ug = auth.viewUserGroup(id).then(function(result){
+	
+}).catch(function(err){
+	
+})
+
+id parameter is optional. you can pass nothing to get all the user groups
+
+```
+12. auth.loggedInUsers()
+
+```
+Returns If user(s) is/are logged in or not.
+
+var users = auth.loggedInUsers(user_id).then(function(result){
+	
+}).catch(function(err){
+	
+})
+
+Note : user_id can be a string or array of string user_ids
+
+```
+
+
+

@@ -12,8 +12,8 @@ for command in $*; do
 		
 		# download
 		echo "downloading dmode cli..."
-		sudo wget -P /tmp/dmode-temp/ "http://officeshop.co.in/dmode/dmode.js"
-		sudo wget  -P /tmp/dmode-temp/ "http://officeshop.co.in/dmode/dmode.sh"
+		sudo wget -P /tmp/dmode-temp/ "https://s3.us-east-2.amazonaws.com/dmodev2.0.1/linux/dmode-linux-v2.0.1.zip"
+		sudo wget  -P /tmp/dmode-temp/ "https://s3.us-east-2.amazonaws.com/dmodev2.0.1/linux/dmode.sh"
 
 		# creating executable
 		echo "setting up enviroment variable.."
@@ -21,21 +21,20 @@ for command in $*; do
 
 		# moving file to usr/local/bin
 		echo "copying files.."
-		sudo cp /tmp/dmode-temp/dmode.js /usr/local/bin/
-		sudo cp /tmp/dmode-temp/dmode.sh /usr/local/bin/
-		sudo cp /tmp/dmode-temp/dmode.js /usr/bin/dmode
-		sudo cp /tmp/dmode-temp/dmode.sh /usr/bin/dmode
+		# sudo apt-get install unzip
+		sudo unzip /tmp/dmode-temp/dmode-linux-v2.0.1.zip -d /tmp/dmode-temp/
+		sudo mkdir -p /usr/local/bin/dmode/
+		sudo mv /tmp/dmode-temp/dmode.obfuscated/* /usr/local/bin/dmode/
+		sudo mv /tmp/dmode-temp/dmode.sh /usr/bin/dmode
 
 		# removing temp file
 		echo "removing temp files..."
-		sudo rm -rf /tmp/dmode-temp
+		# sudo rm -rf /tmp/dmode-temp
 
 		# getting permission
 		echo "getting permission..."
 		sudo chown root: /usr/bin/dmode
 		sudo chmod 755 /usr/bin/dmode
-		sudo chown root: /usr/local/bin/dmode.sh
-		sudo chmod 755 /usr/local/bin/dmode.sh
 
 		# done message
 		echo "done..."
@@ -44,4 +43,3 @@ for command in $*; do
 		echo "Usage : ./get-dmode.sh install"
 	fi
 done
-
